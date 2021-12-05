@@ -1,0 +1,167 @@
+Deeplearning4j OOM Exception Encountered for ComputationGraph
+Timestamp:                              2021-10-30 00:18:13.051
+Thread ID                               1
+Thread Name                             main
+
+
+Stack Trace:
+java.lang.OutOfMemoryError: Cannot allocate new LongPointer(2): totalBytes = 960, physicalBytes = 7566M
+	at org.bytedeco.javacpp.LongPointer.<init>(LongPointer.java:88)
+	at org.bytedeco.javacpp.LongPointer.<init>(LongPointer.java:53)
+	at org.nd4j.linalg.cpu.nativecpu.ops.NativeOpExecutioner.createShapeInfo(NativeOpExecutioner.java:2016)
+	at org.nd4j.linalg.api.shape.Shape.createShapeInformation(Shape.java:3247)
+	at org.nd4j.linalg.api.ndarray.BaseShapeInfoProvider.createShapeInformation(BaseShapeInfoProvider.java:68)
+	at org.nd4j.linalg.api.ndarray.BaseNDArray.<init>(BaseNDArray.java:180)
+	at org.nd4j.linalg.api.ndarray.BaseNDArray.<init>(BaseNDArray.java:174)
+	at org.nd4j.linalg.cpu.nativecpu.NDArray.<init>(NDArray.java:78)
+	at org.nd4j.linalg.cpu.nativecpu.CpuNDArrayFactory.create(CpuNDArrayFactory.java:409)
+	at org.nd4j.linalg.factory.Nd4j.create(Nd4j.java:4033)
+	at org.nd4j.linalg.api.shape.Shape.newShapeNoCopy(Shape.java:2123)
+	at org.deeplearning4j.nn.layers.convolution.ConvolutionLayer.preOutput(ConvolutionLayer.java:459)
+	at org.deeplearning4j.nn.layers.convolution.ConvolutionLayer.activate(ConvolutionLayer.java:505)
+	at org.deeplearning4j.nn.layers.FrozenLayer.activate(FrozenLayer.java:82)
+	at org.deeplearning4j.nn.graph.vertex.impl.LayerVertex.doForward(LayerVertex.java:110)
+	at org.deeplearning4j.nn.graph.ComputationGraph.ffToLayerActivationsInWS(ComputationGraph.java:2135)
+	at org.deeplearning4j.nn.graph.ComputationGraph.computeGradientAndScore(ComputationGraph.java:1372)
+	at org.deeplearning4j.nn.graph.ComputationGraph.computeGradientAndScore(ComputationGraph.java:1341)
+	at org.deeplearning4j.optimize.solvers.BaseOptimizer.gradientAndScore(BaseOptimizer.java:174)
+	at org.deeplearning4j.optimize.solvers.StochasticGradientDescent.optimize(StochasticGradientDescent.java:61)
+	at org.deeplearning4j.optimize.Solver.optimize(Solver.java:52)
+	at org.deeplearning4j.nn.graph.ComputationGraph.fitHelper(ComputationGraph.java:1165)
+	at org.deeplearning4j.nn.graph.ComputationGraph.fit(ComputationGraph.java:1115)
+	at org.deeplearning4j.nn.graph.ComputationGraph.fit(ComputationGraph.java:1082)
+	at org.deeplearning4j.nn.graph.ComputationGraph.fit(ComputationGraph.java:1018)
+	at org.deeplearning4j.nn.graph.ComputationGraph.fit(ComputationGraph.java:1006)
+	at ai.certifai.solution.classification.transferlearning.EditAtBottleneckAndExtendModel.main(EditAtBottleneckAndExtendModel.java:125)
+Caused by: java.lang.OutOfMemoryError: Physical memory usage is too high: physicalBytes (7566M) > maxPhysicalBytes (7229M)
+	at org.bytedeco.javacpp.Pointer.deallocator(Pointer.java:700)
+	at org.bytedeco.javacpp.Pointer.init(Pointer.java:126)
+	at org.bytedeco.javacpp.LongPointer.allocateArray(Native Method)
+	at org.bytedeco.javacpp.LongPointer.<init>(LongPointer.java:80)
+	... 26 more
+
+
+========== Memory Information ==========
+----- Version Information -----
+Deeplearning4j Version                  <could not determine>
+Deeplearning4j CUDA                     <not present>
+
+----- System Information -----
+Operating System                        Microsoft Windows 10
+CPU                                     Intel(R) Core(TM) i5-8300H CPU @ 2.30GHz
+CPU Cores - Physical                    4
+CPU Cores - Logical                     8
+Total System Memory                      15.88 GiB (17048064000)
+
+----- ND4J Environment Information -----
+Data Type                               FLOAT
+backend                                 CPU
+blas.vendor                             OPENBLAS
+os                                      Windows 10
+
+----- Memory Configuration -----
+JVM Memory: XMX                           3.53 GiB (3790077952)
+JVM Memory: current                     294.50 MiB (308805632)
+JavaCPP Memory: Max Bytes                 3.53 GiB (3790077952)
+JavaCPP Memory: Max Physical              7.06 GiB (7580155904)
+JavaCPP Memory: Current Bytes             960.00 B
+JavaCPP Memory: Current Physical          3.97 GiB (4262752256)
+Periodic GC Enabled                     false
+
+----- Workspace Information -----
+Workspaces: # for current thread        4
+Current thread workspaces:
+  Name                      State       Size                          # Cycles            
+  WS_LAYER_WORKING_MEM      CLOSED           .00 B                    32                  
+  WS_ALL_LAYERS_ACT         CLOSED        1.89 GiB (2031113683)       4                   
+  WS_LAYER_ACT_0            CLOSED           .00 B                    3                   
+  WS_LAYER_ACT_1            CLOSED           .00 B                    2                   
+Workspaces total size                     1.89 GiB (2031113683)
+
+----- Network Information -----
+Network # Parameters                    121938245
+Parameter Memory                        465.16 MiB (487752980)
+Parameter Gradients Memory              465.16 MiB (487752980)
+Updater Number of Elements              214447114
+Updater Memory                          818.05 MiB (857788456)
+Updater Classes:
+  org.nd4j.linalg.learning.AdamUpdater
+  org.nd4j.linalg.learning.NoOpUpdater
+Params + Gradient + Updater Memory        1.25 GiB (1345541436)
+Iteration Count                         1
+Epoch Count                             0
+Backprop Type                           Standard
+Workspace Mode: Training                ENABLED
+Workspace Mode: Inference               ENABLED
+Number of Layers                        22
+Layer Counts
+  DenseLayer                              3
+  FrozenLayer                             18
+  OutputLayer                             1
+Layer Parameter Breakdown
+  Idx Name                 Layer Type           Layer # Parameters   Layer Parameter Memory
+  1   block1_conv1         FrozenLayer          1792                   7.00 KiB (7168)   
+  2   block1_conv2         FrozenLayer          36928                144.25 KiB (147712) 
+  3   block1_pool          FrozenLayer          0                         .00 B          
+  4   block2_conv1         FrozenLayer          73856                288.50 KiB (295424) 
+  5   block2_conv2         FrozenLayer          147584               576.50 KiB (590336) 
+  6   block2_pool          FrozenLayer          0                         .00 B          
+  7   block3_conv1         FrozenLayer          295168                 1.13 MiB (1180672)
+  8   block3_conv2         FrozenLayer          590080                 2.25 MiB (2360320)
+  9   block3_conv3         FrozenLayer          590080                 2.25 MiB (2360320)
+  10  block3_pool          FrozenLayer          0                         .00 B          
+  11  block4_conv1         FrozenLayer          1180160                4.50 MiB (4720640)
+  12  block4_conv2         FrozenLayer          2359808                9.00 MiB (9439232)
+  13  block4_conv3         FrozenLayer          2359808                9.00 MiB (9439232)
+  14  block4_pool          FrozenLayer          0                         .00 B          
+  15  block5_conv1         FrozenLayer          2359808                9.00 MiB (9439232)
+  16  block5_conv2         FrozenLayer          2359808                9.00 MiB (9439232)
+  17  block5_conv3         FrozenLayer          2359808                9.00 MiB (9439232)
+  18  block5_pool          FrozenLayer          0                         .00 B          
+  20  fc1                  DenseLayer           102764544            392.02 MiB (411058176)
+  21  fc2                  DenseLayer           4195328               16.00 MiB (16781312)
+  22  fc3                  DenseLayer           262400                 1.00 MiB (1049600)
+  23  newpredictions       OutputLayer          1285                   5.02 KiB (5140)   
+
+----- Layer Helpers - Memory Use -----
+Total Helper Count                      0
+Helper Count w/ Memory                  0
+Total Helper Persistent Memory Use           .00 B
+
+----- Network Activations: Inferred Activation Shapes -----
+Current Minibatch Size                  32
+Current Input Shape (Input 0)           [32, 3, 224, 224]
+Idx Name                 Layer Type           Activations Type                           Activations Shape    # Elements   Memory      
+0   input_1              InputVertex          InputTypeConvolutional(h=224,w=224,c=3,NCHW) [32, 3, 224, 224]    4816896       18.38 MiB (19267584)
+1   block1_conv1         FrozenLayer          InputTypeConvolutional(h=224,w=224,c=64,NCHW) [32, 64, 224, 224]   102760448    392.00 MiB (411041792)
+2   block1_conv2         FrozenLayer          InputTypeConvolutional(h=224,w=224,c=64,NCHW) [32, 64, 224, 224]   102760448    392.00 MiB (411041792)
+3   block1_pool          FrozenLayer          InputTypeConvolutional(h=112,w=112,c=64,NCHW) [32, 64, 112, 112]   25690112      98.00 MiB (102760448)
+4   block2_conv1         FrozenLayer          InputTypeConvolutional(h=112,w=112,c=128,NCHW) [32, 128, 112, 112]  51380224     196.00 MiB (205520896)
+5   block2_conv2         FrozenLayer          InputTypeConvolutional(h=112,w=112,c=128,NCHW) [32, 128, 112, 112]  51380224     196.00 MiB (205520896)
+6   block2_pool          FrozenLayer          InputTypeConvolutional(h=56,w=56,c=128,NCHW) [32, 128, 56, 56]    12845056      49.00 MiB (51380224)
+7   block3_conv1         FrozenLayer          InputTypeConvolutional(h=56,w=56,c=256,NCHW) [32, 256, 56, 56]    25690112      98.00 MiB (102760448)
+8   block3_conv2         FrozenLayer          InputTypeConvolutional(h=56,w=56,c=256,NCHW) [32, 256, 56, 56]    25690112      98.00 MiB (102760448)
+9   block3_conv3         FrozenLayer          InputTypeConvolutional(h=56,w=56,c=256,NCHW) [32, 256, 56, 56]    25690112      98.00 MiB (102760448)
+10  block3_pool          FrozenLayer          InputTypeConvolutional(h=28,w=28,c=256,NCHW) [32, 256, 28, 28]    6422528       24.50 MiB (25690112)
+11  block4_conv1         FrozenLayer          InputTypeConvolutional(h=28,w=28,c=512,NCHW) [32, 512, 28, 28]    12845056      49.00 MiB (51380224)
+12  block4_conv2         FrozenLayer          InputTypeConvolutional(h=28,w=28,c=512,NCHW) [32, 512, 28, 28]    12845056      49.00 MiB (51380224)
+13  block4_conv3         FrozenLayer          InputTypeConvolutional(h=28,w=28,c=512,NCHW) [32, 512, 28, 28]    12845056      49.00 MiB (51380224)
+14  block4_pool          FrozenLayer          InputTypeConvolutional(h=14,w=14,c=512,NCHW) [32, 512, 14, 14]    3211264       12.25 MiB (12845056)
+15  block5_conv1         FrozenLayer          InputTypeConvolutional(h=14,w=14,c=512,NCHW) [32, 512, 14, 14]    3211264       12.25 MiB (12845056)
+16  block5_conv2         FrozenLayer          InputTypeConvolutional(h=14,w=14,c=512,NCHW) [32, 512, 14, 14]    3211264       12.25 MiB (12845056)
+17  block5_conv3         FrozenLayer          InputTypeConvolutional(h=14,w=14,c=512,NCHW) [32, 512, 14, 14]    3211264       12.25 MiB (12845056)
+18  block5_pool          FrozenLayer          InputTypeConvolutional(h=7,w=7,c=512,NCHW) [32, 512, 7, 7]      802816         3.06 MiB (3211264)
+19  flatten              PreprocessorVertex   InputTypeFeedForward(25088)                [32, 25088]          802816         3.06 MiB (3211264)
+20  fc1                  DenseLayer           InputTypeFeedForward(4096)                 [32, 4096]           131072       512.00 KiB (524288)
+21  fc2                  DenseLayer           InputTypeFeedForward(1024)                 [32, 1024]           32768        128.00 KiB (131072)
+22  fc3                  DenseLayer           InputTypeFeedForward(256)                  [32, 256]            8192          32.00 KiB (32768)
+23  newpredictions       OutputLayer          InputTypeFeedForward(5)                    [32, 5]              160            640.00 B  
+Total Activations Memory                  1.82 GiB (1953137280)
+Total Activation Gradient Memory          1.82 GiB (1953136640)
+
+----- Network Training Listeners -----
+Number of Listeners                     4
+Listener 0                              org.deeplearning4j.ui.model.stats.StatsListener@3701e6e4
+Listener 1                              ScoreIterationListener(5)
+Listener 2                              org.deeplearning4j.optimize.listeners.EvaluativeListener@c6634d
+Listener 3                              org.deeplearning4j.optimize.listeners.EvaluativeListener@65f58c6e

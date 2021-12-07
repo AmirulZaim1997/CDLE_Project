@@ -53,6 +53,7 @@ public class OpenCV_HaarCascadeFaceDetector extends FaceDetector {
     public void detectFaces(Mat image) {
         cvtColor(image, gray, COLOR_BGR2GRAY);
         haar_cascade.detectMultiScale(gray, faces, 1.3, 5, 0, minSize, maxSize);
+
     }
 
     @Override

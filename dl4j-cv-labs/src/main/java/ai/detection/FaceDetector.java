@@ -63,10 +63,11 @@ public class FaceDetector implements IFaceDetector {
     @Override
     public void detectFaces(Mat image) {
 
+
     }
 
     @Override
-    public List<FaceLocalization> getFaceLocalization() {
+    public  List<FaceLocalization> getFaceLocalization() {
         return null;
     }
 

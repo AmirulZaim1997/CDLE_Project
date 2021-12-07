@@ -78,6 +78,7 @@ public class OpenCV_DeepLearningFaceDetector extends FaceDetector {
         model.setInput(blob);
         // feed forward the input to the netwrok to get the output matrix
         detectedFaces = model.forward();
+
     }
 
     @Override

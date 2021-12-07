@@ -14,6 +14,10 @@ import org.bytedeco.opencv.opencv_core.Point;
 import org.bytedeco.opencv.opencv_core.Rect;
 import org.bytedeco.opencv.opencv_core.Scalar;
 import org.bytedeco.opencv.opencv_videoio.VideoCapture;
+import org.deeplearning4j.nn.graph.ComputationGraph;
+import org.deeplearning4j.zoo.PretrainedType;
+import org.deeplearning4j.zoo.ZooModel;
+import org.deeplearning4j.zoo.model.VGG16;
 import org.nd4j.common.io.ClassPathResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,6 +44,11 @@ public class FaceRecognition {
         //face identifier and face detector
         FaceDetector faceDetector = getFaceDetector(FaceDetector.OPENCV_DL_FACEDETECTOR);
         FaceIdentifier faceIdentifier = getFaceIdentifier(FaceIdentifier.FEATURE_DISTANCE_VGG16_PREBUILT);
+
+        ComputationGraph model = (ComputationGraph) VGG16.builder().build().initPretrained(PretrainedType.VGGFACE);
+        log.info(model.summary());
+
+
 
         //stream video frame from camera
         VideoCapture capture = new VideoCapture();
@@ -71,6 +80,8 @@ public class FaceRecognition {
             List<List<Prediction>> faceIdentities = faceIdentifier.recognize(faceLocalizations, cloneCopy);
             labelIndividual(faceIdentities, image);
 
+
+
             // Display output in a window
             imshow(outputWindowsName, image);
 
@@ -81,6 +92,7 @@ public class FaceRecognition {
                 break;
             }
         }
+
 
 
 

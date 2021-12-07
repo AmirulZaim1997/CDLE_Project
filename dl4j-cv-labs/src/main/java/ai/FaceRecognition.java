@@ -74,14 +74,13 @@ public class FaceRecognition {
             // Display output in a window
             imshow(outputWindowsName, image);
 
-            char key = (char) waitKey(20);
+            char key = (char) waitKey(32);
             // Exit this loop on escape:
             if (key == 27) {
                 destroyAllWindows();
                 break;
             }
         }
-
 
 
     }
@@ -99,7 +98,7 @@ public class FaceRecognition {
                         ),
                         FONT_HERSHEY_COMPLEX,
                         0.5,
-                        Scalar.YELLOW
+                        Scalar.BLUE
                 );
             }
         }
@@ -128,11 +127,11 @@ public class FaceRecognition {
             case FaceIdentifier.FEATURE_DISTANCE_VGG16_PREBUILT:
                 return new DistanceFaceIdentifier(
                         new VGG16FeatureProvider(),
-                        new ClassPathResource("FaceDB").getFile(), 0.5, 2);
+                        new ClassPathResource("TestFile").getFile(), 0.5, 2);
             case FaceIdentifier.FEATURE_DISTANCE_INCEPTION_RESNET_PREBUILT:
                 return new DistanceFaceIdentifier(
                         new InceptionResNetFeatureProvider(),
-                        new ClassPathResource("FaceDB").getFile(), 0.3, 2);
+                        new ClassPathResource("TestFile").getFile(), 0.3, 2);
             default:
                 return null;
         }
